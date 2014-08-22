@@ -1,0 +1,105 @@
+
+<html lang="en">
+  <head>
+    <title>Env Comparison</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/grid/grid.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/starter-template/starter-template.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Env Comparison</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+
+
+      <div class="starter-template">
+        <h1>Environment Comparison</h1>
+      </div>
+
+
+
+
+
+
+  <div class="bs-example">
+    <table class="table">
+      <thead>
+        <tr class="success">
+          <th>{{ server1_dict['ssh_hostname'].title() }}</th>
+          <th></th>
+          <th>{{ server2_dict['ssh_hostname'].title() }}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+
+       {% for value in samekeysandvalues %}
+        <tr class="success">
+          <td>{{ value }}</td>
+          <td>{{ server1_dict[value] }}</td>
+          <td>{{ value }}</td>
+          <td>{{ server2_dict[value] }}</td>
+        </tr>
+      {% end %}
+
+      {% for value in samekeysdiffvalues %}
+       <tr class="warning">
+          <td> {{ value }}</td>
+          <td> {{ server1_dict[value] }}</td>
+          <td> {{ value }}</td>
+          <td> {{ server2_dict[value] }}</td>
+        </tr>
+      {% end %}
+
+      {% for value in missingkeys %}
+       <tr class="danger">
+          <td>{{ value }}</td>
+          <td>{{ server1_dict[value] }}</td>
+          <td>{{ value }} </td>
+          <td> - </td>
+      </tr>
+     {% end %}
+
+     {% for value in extrakeys %}
+       <tr class="danger">
+          <td>{{ value }}</td>
+          <td> - </td>
+          <td>{{ value }}</td>
+          <td>{{ server2_dict[value] }}</td>
+      </tr>
+    {% end %}
+
+
+
+
+
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+
+
+
+  </body>
+</html>
+
