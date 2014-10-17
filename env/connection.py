@@ -45,8 +45,9 @@ class Connection(object):
             pass
 
     def get_platform_family(self):
-
-        # https://github.com/opscode/ohai/blob/master/lib/ohai/plugins/linux/platform.rb
+        """
+        Get platform family
+        """
         if self.system['platform'] in ['oracle', 'centos', 'redhat', 'scientific', 'enterpriseenterprise', 'amazon']:
             self.system['platform_family'] = 'rhel'
         if self.system['platform'] in ['debian', 'ubuntu', 'linuxmint']:
@@ -100,10 +101,16 @@ class Connection(object):
 
         
     def get_fqdn(self):
+        """
+        Get the fully qualified domain name
+        """
         self.system['fqdn'] = self._run_command('hostname --fqdn')[0].strip()
 
 
     def get_pip_packages(self):
+        """
+        Get packages installed to Global PIP
+        """
         if self._check_command('which pip') == 0:
             for line in self._run_command('pip freeze'):
                 parts = line.strip().split('==')
@@ -111,6 +118,9 @@ class Connection(object):
 
         
     def get_php_info(self):
+        """
+        Get globally installed PHP packages
+        """
         if self._check_command('which php') == 0:
             for line in self._run_command('php -i | grep -i "version =>"'):
                 parts = line.strip().split(' => ')
