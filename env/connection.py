@@ -26,11 +26,17 @@ class Connection(object):
 
 
     def _run_command(self, cmd):
+        """
+        Run a remote command and gather output
+        """
         stdin, stdout, stderr = self.ssh_client.exec_command(cmd)
         return stdout.readlines()
 
         
     def _check_command(self, cmd):
+        """ 
+        Run a remote command and get the exit status
+        """
         stdin, stdout, stderr = self.ssh_client.exec_command(cmd)
         return stdout.channel.recv_exit_status()
 
