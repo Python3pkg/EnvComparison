@@ -44,7 +44,6 @@ class Connection(object):
         if self._check_command('which') != 1:
             pass
 
-
     def get_platform_family(self):
 
         # https://github.com/opscode/ohai/blob/master/lib/ohai/plugins/linux/platform.rb
@@ -57,11 +56,11 @@ class Connection(object):
 
     def get_packages(self):
         """ 
-        print out dpkg -l or parse /var/lib/dpkg/status ??? 
+        Get packages installed through the default pakacga manager
         """
         self.packages = {}
         if self.system['platform_family'] == 'debian':
-            for line in self._run_command('dpkg -l'):
+            for line in self._run_command('dpkg -l'): # parse dpkg -l or /var/lib/dpkg/status ??? 
                 parts = line.split()
                 if parts[0] == 'ii':
                     self.packages[parts[1]] = parts[2]
