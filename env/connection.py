@@ -108,14 +108,14 @@ class Connection(object):
         if self._check_command('which pip') == 0:
             for line in self._run_command('pip freeze'):
                 parts = line.strip().split('==')
-                self.system[parts[0]] = parts[1] 
+                self.system['Python-Pip' + str(parts[0])] = parts[1] 
 
         
     def get_php_info(self):
         if self._check_command('which php') == 0:
             for line in self._run_command('php -i | grep -i "version =>"'):
                 parts = line.strip().split(' => ')
-                self.system[parts[0]] = parts[1]
+                self.system['PHP' + str(parts[0])] = parts[1]
 
 
 

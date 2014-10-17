@@ -7,6 +7,40 @@ import tornado.ioloop
 import tornado.web
 import os
 
+def compare_servers(opt_1, opt_2, host_list, ssh_config):
+
+    connection_pool = [
+        connection.Connection(ssh_config, host_list[int(opt_1)]),
+        connection.Connection(ssh_config, host_list[int(opt_2)])
+        ]
+
+
+    for conn in connection_pool:
+        conn.get_platform_details()
+        conn.get_platform_family()
+        conn.get_packages()
+        conn.get_system_arch()
+        conn.get_fqdn()
+        conn.get_php_info()
+        #conn.get_pip_packages()
+        #conn.pretty_print
+
+
+    global server1_dict
+    global server2_dict
+
+    server1_dict, server2_dict = connection_pool[0].system, connection_pool[1].system
+
+
+    global samekeysandvalues
+    global samekeysdiffvalues
+    global missingkeys
+    global extrakeys
+
+    samekeysandvalues, samekeysdiffvalues, missingkeys, extrakeys = differ.diffdict(connection_pool[0].system, connection_pool[1].system)
+
+
+
 
 def main():
 
@@ -21,38 +55,7 @@ def main():
     opt_1 = raw_input('Please select the first server:')
     opt_2 = raw_input('Please select the second server:')
 
-
-    connection_pool = [
-        connection.Connection(ssh_config, host_list[int(opt_1)]),
-        connection.Connection(ssh_config, host_list[int(opt_2)])
-        ]
-
-
-    for conn in connection_pool:
-        conn.get_platform_details() 
-        conn.get_platform_family()
-        conn.get_packages()
-        conn.get_system_arch()
-        conn.get_fqdn()
-        conn.get_php_info()
-        #conn.get_pip_packages()
-        #conn.pretty_print
-
-
-    global server1_dict
-    global server2_dict
- 
-    server1_dict, server2_dict = connection_pool[0].system, connection_pool[1].system
-
-
-    global samekeysandvalues
-    global samekeysdiffvalues
-    global missingkeys
-    global extrakeys
-
-    samekeysandvalues, samekeysdiffvalues, missingkeys, extrakeys = differ.diffdict(connection_pool[0].system, connection_pool[1].system)
-
-
+    compare_servers(int(opt_1), int(opt_2), host_list, ssh_config)
     
 
 
