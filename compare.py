@@ -22,7 +22,8 @@ def compare_servers(opt_1, opt_2, host_list, ssh_config):
         conn.get_system_arch()
         conn.get_fqdn()
         conn.get_php_info()
-        #conn.get_pip_packages()
+        conn.get_ruby_info()
+        conn.get_pip_packages()
         #conn.pretty_print
 
 

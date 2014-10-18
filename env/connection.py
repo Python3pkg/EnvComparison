@@ -129,6 +129,17 @@ class Connection(object):
                 self.system['php-package-' + str(parts[0])] = parts[1]
 
 
+    def get_ruby_info(self):
+        """
+        Get globally installed Ruby packages
+        """
+        if self._check_command('which gem') == 0:
+            for line in self._run_command('gem list | grep -i "(\|)"'):
+                parts = line.strip().split(' ')
+                parts[1] = parts[1].replace('(','').replace(')','')
+                self.system['ruby-package-' + str(parts[0])] = parts[1]
+
+
 
     def pretty_print(self):
         pp = pprint.PrettyPrinter(indent=4)
