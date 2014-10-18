@@ -3,9 +3,6 @@ import re
 import pprint
 
 
-
-
-
 class Connection(object):
     
     def __init__(self, config_location, server_name):
@@ -13,7 +10,6 @@ class Connection(object):
 
         self.system = {}
         self.system['ssh_hostname'] = server_name
-        self.system['system'] = {'ssh_hostname':server_name}
 
         config = SSHConfig()
         config.parse(open(config_location))
@@ -70,7 +66,7 @@ class Connection(object):
             for line in self._run_command('dpkg -l'): # parse dpkg -l or /var/lib/dpkg/status ??? 
                 parts = line.split()
                 if parts[0] == 'ii':
-                    self.packages[parts[1]] = parts[2]
+                    self.system['system-package-' + str(parts[1])] = parts[2]
 
         elif self.system['platform_family'] == 'rhel':
             pass
@@ -84,7 +80,7 @@ class Connection(object):
         #    self.system['platform_family'] == 
 
 
-        self.system['packages'] = self.packages
+        #self.system['packages'] = self.packages
 
 
     def get_platform_details(self):
@@ -120,7 +116,7 @@ class Connection(object):
         if self._check_command('which pip') == 0:
             for line in self._run_command('pip freeze'):
                 parts = line.strip().split('==')
-                self.system['Python-Pip' + str(parts[0])] = parts[1] 
+                self.system['pip-package-' + str(parts[0])] = parts[1] 
 
         
     def get_php_info(self):
@@ -130,7 +126,7 @@ class Connection(object):
         if self._check_command('which php') == 0:
             for line in self._run_command('php -i | grep -i "version =>"'):
                 parts = line.strip().split(' => ')
-                self.system['PHP' + str(parts[0])] = parts[1]
+                self.system['php-package-' + str(parts[0])] = parts[1]
 
 
 
