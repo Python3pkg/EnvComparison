@@ -57,7 +57,7 @@ class Connection(object):
         if self.system['platform'] in ['fedora']:
             self.system['platform_family'] = 'fedora'
 
-    def get_packages(self):
+    def get_system_packages(self):
         """ 
         Get packages installed through the default pakacga manager
         """
@@ -119,7 +119,7 @@ class Connection(object):
                 self.system['pip-package-' + str(parts[0])] = parts[1] 
 
         
-    def get_php_info(self):
+    def get_php_packages(self):
         """
         Get globally installed PHP packages
         """
@@ -129,7 +129,7 @@ class Connection(object):
                 self.system['php-package-' + str(parts[0])] = parts[1]
 
 
-    def get_ruby_info(self):
+    def get_ruby_packages(self):
         """
         Get globally installed Ruby packages
         """

@@ -18,11 +18,11 @@ def compare_servers(opt_1, opt_2, host_list, ssh_config):
     for conn in connection_pool:
         conn.get_platform_details()
         conn.get_platform_family()
-        conn.get_packages()
+        conn.get_system_packages()
         conn.get_system_arch()
         conn.get_fqdn()
-        conn.get_php_info()
-        conn.get_ruby_info()
+        conn.get_php_packages()
+        conn.get_ruby_packages()
         conn.get_pip_packages()
         #conn.pretty_print
 
