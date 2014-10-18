@@ -24,7 +24,6 @@ def compare_servers(opt_1, opt_2, host_list, ssh_config):
         conn.get_php_packages()
         conn.get_ruby_packages()
         conn.get_pip_packages()
-        #conn.pretty_print
 
 
     global server1_dict
