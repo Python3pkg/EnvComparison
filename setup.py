@@ -8,5 +8,6 @@ setup(name='EnvComparison',
       author='Andrew Martin',
       author_email='a.a.d.martin@gmail.com',
       url='https://github.com/adamar/EnvComparison',
+      install_requires=["paramiko", "tornado"],
       packages=['EnvComparison'],
      )
