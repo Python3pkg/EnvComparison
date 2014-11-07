@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from env import connection, ssh_hosts, server, differ
+from EnvComparison import connection, ssh_hosts, server, differ
 import sys
 import tornado.httpserver
 import tornado.ioloop
