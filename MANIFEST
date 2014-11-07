@@ -2,4 +2,11 @@
 README
 compare.py
 setup.py
-EnvComparison/compare.py
+EnvComparison/__init__.py
+EnvComparison/connection.py
+EnvComparison/differ.py
+EnvComparison/packages.py
+EnvComparison/platform.py
+EnvComparison/server.py
+EnvComparison/site.py
+EnvComparison/ssh_hosts.py
