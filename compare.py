@@ -45,15 +45,15 @@ def compare_servers(opt_1, opt_2, host_list, ssh_config):
 def main():
 
     if len(sys.argv) != 2:
-        print "Please provide the location of your ssh config file"
+        print("Please provide the location of your ssh config file")
         sys.exit()
     ssh_config = sys.argv[1]
     host_list = ssh_hosts.get_host_list(ssh_config)
 
-    for key, value in host_list.items():
-        print "[",key,"] ",value
-    opt_1 = raw_input('Please select the first server:')
-    opt_2 = raw_input('Please select the second server:')
+    for key, value in list(host_list.items()):
+        print("[",key,"] ",value)
+    opt_1 = input('Please select the first server:')
+    opt_2 = input('Please select the second server:')
 
     compare_servers(int(opt_1), int(opt_2), host_list, ssh_config)
     
@@ -88,7 +88,7 @@ class Application(tornado.web.Application):
 def server():
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(8888)
-    print "Please browse to http://127.0.0.1:8888/"
+    print("Please browse to http://127.0.0.1:8888/")
     tornado.ioloop.IOLoop.instance().start()
 
 
